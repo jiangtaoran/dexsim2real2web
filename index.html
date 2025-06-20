@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Actively Building Explicit World Model for Precise Articulated Object Manipulation">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=2">
+  
+
+
+
+
+
+  <title>DexSim2Real2:Building Explicit World Model for Precise Articulated Object Manipulation</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css"> 
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <!--from carousel templete-->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <!--/from carousel templete-->
+  
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>  
+  <script src="./static/js/bulma-slider.min.js"></script> 
+  <script src="./static/js/index.js"></script>
+
+ 
+</head> 
+
+<body>
+
+<!--<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>-->
+
+
+<section class="hero">
+  <div class="hero-body" style="background:#dcdcdc;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">DexSim2Real<sup>2</sup>:Building Explicit World Model for Precise Articulated Object Manipulations</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a >Taoran Jiang</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a >Yixuan Guan</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a >Liqian Ma</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a >Jing Xu</a><sup>*</sup>,</span>
+           
+            <span class="author-block">
+              <a >Jiaojiao Meng</a>,
+            </span>
+            <span class="author-block">
+              <a >Weihang Chen</a>,
+            </span>
+            <span class="author-block">
+              <a >Zecui Zeng</a>,
+            </span>
+            <span class="author-block">
+              <a >Lusong Li</a>,
+            </span>
+            </span>
+              <a >Dan Wu</a>,
+            </span>
+         
+            <span class="author-block">
+              <a href="https://callmeray.github.io/homepage/">Rui Chen</a>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Department of Mechanical Engineering, Tsinghua University</span><br>
+            <span class="author-block">JD Explore Academy</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href ="https://arxiv.org/html/2409.08750"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/GmN8hW0uMYE?si=qALNbKzZ3GVJr3um"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/jiangtaoran/DexSim2Real2"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!--<span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>-->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-centered has-text-centered">
+    <div class="column is-centered">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/sim_real.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-centered has-text-justified">
+    <div class="container">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/hero_teaser.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="container has-text-justified">
+      <p>
+         We present <b>DexSim2Real<sup>2</sup></b>, a novel robot learning framework designed for precise, 
+         goal-conditioned articulated object manipulation with two-finger grippers and dexterous hands. 
+         We first build the explicit world model of the target object in a physics simulator through active interaction 
+         and then use MPC to search for a long-horizon manipulation trajectory to achieve the desired manipulation goal. 
+         Quantitative evaluation of real object manipulation results verifies the effectiveness of our proposed framework for both kinds of end effectors.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="section" style="background:#dcdcdc;" >
+  <div class="container is-max-desktop"  >
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered"  >
+      <div class="column is-full-width" >
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Articulated object manipulation is ubiquitous in daily life. 
+            In this paper, we present DexSim2Real<sup>2</sup>, a novel robot learning framework for 
+            goal-conditioned articulated object manipulation using both two-finger grippers and multi-finger dexterous hands. 
+          </p>
+          <p>
+            The key of our framework is constructing an explicit world model of unseen articulated 
+            objects through active interactions. This explicit world model enables sampling-based 
+            model predictive control to plan trajectories achieving different manipulation goals without needing
+             human demonstrations or reinforcement learning.
+          </p>
+          <p>
+            It first predicts an interaction motion using an affordance estimation network trained on 
+            self-supervised interaction data or videos of human manipulation from the internet. 
+            After executing the interactions on the real robot to move the object parts, 
+            we propose a novel modeling pipeline based on 3D AIGC to build a digital twin of the object in simulation 
+            from multiple frames of observations. 
+            </p>
+          <p>
+            For dexterous multi-finger manipulation, we propose to utilize eigengrasp 
+             to reduce the high-dimensional action space, enabling more efficient trajectory searching. 
+             Extensive experiments validate the framework's effectiveness for precise articulated object manipulation 
+             in both simulation and the real world using a two-finger gripper and a 16-DoF dexterous hand. 
+          </p>
+          <p>
+            The robust generalizability of the explicit world model also enables advanced manipulation strategies, 
+            such as manipulating with different tools.
+          </p>
+          
+        </div>
+        <div class="column is-centered">
+          <img src="./static/images/teaser.jpg" alt="abstract picture" width="600px" height="auto" style="margin:0 auto;">
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </section>
+  <section class="section" >
+    <!-- Paper video. -->
+    <div class="container is-max-desktop has-text-centered" >
+      <div class="column is-full-width">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/GmN8hW0uMYE?si=Wlo5TJRNCU5_AT3G"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+
+    <!--method-->
+    <div class="container is-max-desktop has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/method.jpg" alt="method" class="center-img">
+          <p>
+           Our framework consists of three phases. 
+           (1) Given a partial point cloud of an unseen articulated object, in the <b>Interactive Perception</b> phase, 
+           we train an affordance prediction module and use it to change the object’s joint state through a one-step interaction. 
+           Training data can be acquired through self-supervised interaction in simulation or from egocentric human demonstration videos. 
+           (2) In the <b>Explicit Physics Model Construction</b> phase, we build a mental model in a physics simulator 
+           from the K+1 frames of observations. 
+           (3) In the <b>Sampling-based Model Predictive Control</b> phase,
+            we use the model to plan a long-horizon trajectory in simulation and then execute the trajectory on the real robot to complete the
+             task. For dexterous hands, an eigengrasp module is needed for dimensionality reduction.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container is-max-desktop has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Model Reconstruction</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/model_construction.png" alt="method" class="center-img">
+          <p>
+            For each state of the articulated object, we begin by generating an unaligned and unscaled mesh from multi-view RGB images using 3D AIGC. 
+            Next, we estimate the scale and pose through differentiable rendering, and segment the aligned mesh into sub-parts. 
+            Once segmented point clouds for each state are obtained, we infer movable part segmentation by analyzing differences between frames of 
+            point clouds. We estimate the kinematic structure of the mesh, including the part tree hierarchy, joint categories (prismatic or revolute), 
+            and joint configurations (axis direction and origin). Finally, we construct a digital twin of the articulated object represented in URDF 
+            format, which can be easily loaded into different physics simulators.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/method-->
+  </div>
+</section>
+
+
+
+
+
+<!-- CSS -->
+<style>
+  .carousel .item {
+    width: 100% !important;
+    min-width: 100%;
+    flex: 0 0 100% !important;
+    margin-right: 0 !important;
+  }
+</style>
+
+<!-- JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    bulmaCarousel.attach('#results-carousel', {
+      slidesToShow: 1,    // ✅ 关键修复
+      slidesToScroll: 1,
+      pagination: true,
+      navigation: true
+    });
+  });
+</script>
+<!-- Image carousel -->
+<section class="container">
+
+    <div class="container is-max-dextop has-text-centered">
+      <h2 class="title is-cnetered">Main Results</h2> 
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <!-- Your image here -->
+        <div align="center">
+          <img src="static/images/where2act_vs_vrb.jpg" alt="result"/>
+        </div>
+        <h2 class="subtitle has-text-justified">
+          Visualization of affordance detection results: results of VRB are shown in green arrows, 
+          and results of Where2Act are shown in red arrows.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <div align="center">
+          <img src="static/images/eigen.jpg" alt="reward_ablation" height="70%"/>
+        </div>
+        <h2 class="subtitle has-text-justified">
+            We validate effectiveness of EigenGrasp method in reducing the 
+              action dimension of a dexterous hand by evaluating three factors: success rate, joint jerk, and algorithm running time.
+       </h2>
+     </div>
+     <div class="item">
+      <!-- Your image here -->
+      <div align="center">
+        <video id="multi" autoplay muted loop playsinline height="100%">
+              <source src="./static/videos/multi_part_video .mp4"
+                      type="video/mp4">
+        </video>
+      </div>
+      <h2 class="subtitle has-text-justified">
+        Manipulate objects with multiple moveable parts. Our approach shows high accuracy on objects with revolute and prismatic joints.
+      </h2>
+    </div>
+    <div class="item">
+      <!-- Your image here -->
+      <div align="center">
+        <video id="usetools" autoplay muted loop playsinline height="100%">
+              <source src="./static/videos/use_tools.mp4"
+                      type="video/mp4">
+        </video>
+      </div>
+      <h2 class="subtitle has-text-justified">
+        Open drawer with tools. In real scenarios, the object may be beyond the robot's reach, or the gripper cannot fit into the object's size. Our method can be extended to tool-using cases. As shown in these two sequences, the robot uses a T-shaped tool or a semi-ring to open the small drawer.
+      </h2>
+    </div>
+  </div>
+</div>
+
+</section>
+<!-- End image carousel -->
+
+
+
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
